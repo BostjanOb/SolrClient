@@ -1,5 +1,5 @@
 {
-    "name": "BostjanOb/SolrClient",
+    "name": "bostjanob/solr-client",
     "description": "Apache SOLR client for ZF2",
     "type": "library",
     "license": "MIT",
