@@ -1,0 +1,35 @@
+{
+    "name": "BostjanOb/SolrClient",
+    "description": "Apache SOLR client for ZF2",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "solr",
+        "module",
+        "zf2"
+    ],
+    "homepage": "https://github.com/BostjanOb/SolrClient",
+    "authors": [
+        {
+            "name": "Bostjan Oblak",
+            "email": "bostjan@muha.cc",
+            "homepage": "http://bostjan.muha.cc/"
+        },
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zendframework": "2.*"
+    },
+    "require-dev": {
+        "zendframework/zend-developer-tools": "dev-master"
+    },
+    "suggest": {
+        "zendframework/zend-developer-tools": "zend-developer-tools if you want to profile operations executed by the client during development"
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-0": {
+            "SolrClient": "src/"
+        }
+    }
+}
