@@ -14,7 +14,7 @@
             "name": "Bostjan Oblak",
             "email": "bostjan@muha.cc",
             "homepage": "http://bostjan.muha.cc/"
-        },
+        }
     ],
     "require": {
         "php": ">=5.3.3",
