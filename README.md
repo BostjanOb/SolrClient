@@ -8,8 +8,11 @@ Features :
   - Spellcheck
 
 ## Requirements
-[Zend Framework 2](http://www.github.com/zendframework/zf2)
-[Apache Solr] (http://lucene.apache.org/solr/)
+ 1. [Zend Framework 2](http://www.github.com/zendframework/zf2)
+ 2. [Apache Solr] (http://lucene.apache.org/solr/)
+
+In your solrconfig.xml you must have php query response writer enabled:
+``<queryResponseWriter name="phps" class="solr.PHPSerializedResponseWriter"/>``
 
 ## Installation
 
@@ -50,7 +53,6 @@ return array(
 Access the solrClient using the following alias:
 
 ```php
-<?php
 $client = $this->getServiceLocator()->get('solr.solr_default');
 ```
 
@@ -60,7 +62,6 @@ Coming soon...
 ## Deleting documents
 Deleting documents by ID
 ```php
-<?php
 $solrClient->deleteById(1);
 $solrClient->commit();
 
@@ -73,13 +74,11 @@ $solrClient->deleteById(array(1,2,3,4), true);
 
 #### Commit
 ```php
-<?php
 public function commit($optimize = false, $waitFlush = true, $waitSearcher = true)
 ```
 
 #### Optimize
 ```php
-<?php
     public function optimize($waitFlush = true, $waitSearcher = true, $maxSegments = 1)
 ```
 
