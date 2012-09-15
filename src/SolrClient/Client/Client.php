@@ -233,13 +233,11 @@ class Client {
         $client = new Http\Client($request->getUri());
         $client->setAdapter('Zend\Http\Client\Adapter\Curl');
 
-        // todo: event manager
-        // if (self::$_logger) self::$_logger->start($uri);
+        if ($this->logger) $this->logger->start($updateUri);
 
         $response = $client->send($request);
 
-        // todo: event manager
-        // if (self::$_logger) self::$_logger->end();
+        if ($this->logger) $this->logger->end();
 
         if ($response->getStatusCode() != 200)
             throw new \Zend\Http\Exception\RuntimeException('Query error. Reason: ' . $response->getReasonPhrase());
