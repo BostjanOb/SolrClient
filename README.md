@@ -6,12 +6,14 @@ Features :
   - Query builder
   - Facets
   - Spellcheck
+  - Zend Developer Toolbar plugin
 
 ## Requirements
  1. [Zend Framework 2](http://www.github.com/zendframework/zf2)
  2. [Apache Solr] (http://lucene.apache.org/solr/)
+ 3. CURL module enabled in php
 
-In your solrconfig.xml you must have php query response writer enabled:
+In your solrconfig.xml you must have php serialized query response writer enabled:
 ``<queryResponseWriter name="phps" class="solr.PHPSerializedResponseWriter"/>``
 
 ## Installation

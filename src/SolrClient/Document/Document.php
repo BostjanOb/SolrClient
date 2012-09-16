@@ -53,7 +53,7 @@ class Document implements \ArrayAccess, \Countable {
             if (empty($field))
                 throw new \Exception('Field could not be empty');
 
-            $doc = new Document\Field($field, $value, $boostValue);
+            $doc = new Field($field, $value, $boostValue);
         }
         else
             $doc = $field;

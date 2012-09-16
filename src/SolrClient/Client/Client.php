@@ -231,7 +231,8 @@ class Client {
                 ->setContent($body);
 
         $client = new Http\Client($request->getUri());
-        $client->setAdapter('Zend\Http\Client\Adapter\Curl');
+        // todo: check some problem of sending content
+        //$client->setAdapter('Zend\Http\Client\Adapter\Curl');
 
         if ($this->logger) $this->logger->start($updateUri);
 
