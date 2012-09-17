@@ -10,51 +10,51 @@ use Zend\Http\Response;
  * @license MIT
  * @author  Bostjan Oblak <bostjan@muha.cc>
  */
-class Result
+class Result implements ResultInterface
 {
 
   /**
    * @var Response $response
    */
-  private $response;
+  protected $response;
 
   /**
    * @var array $documents
    */
-  private $documents = array();
+  protected $documents = array();
 
   /**
    * @var int $numFound
    */
-  private $numFound;
+  protected $numFound;
 
   /**
    * Is json parsed
    *
    * @var bool $isParsed
    */
-  private $isParsed = false;
+  protected $isParsed = false;
 
   /**
    * Parsed facet fields
    *
    * @var array $facetFields
    */
-  private $facetFields = array();
+  protected $facetFields = array();
 
   /**
    * Spellcheck
    *
    * @var array $spellcheck
    */
-  private $spellcheck = array();
+  protected $spellcheck = array();
 
   /**
    * Spellcheck collation
    *
    * @var string
    */
-  private $spellcheckCollation;
+  protected $spellcheckCollation;
 
   /**
    * Construct object

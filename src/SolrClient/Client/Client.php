@@ -5,7 +5,7 @@ namespace SolrClient\Client;
 use Zend\Uri\Http as HttpUri,
     Zend\Http,
     SolrClient\Document\Document,
-    SolrClient\Query\Result,
+    SolrClient\Query\ResultInterface,
     SolrClient\Query\Query;
 
 /**
@@ -36,7 +36,7 @@ class Client {
      */
     private $logger;
 
-    //private static $_logger;
+    private $resultClass = '\SolrClient\Query\Result';
 
     public function __construct(HttpUri $uri) {
         $this->uri = $uri;
@@ -176,8 +176,8 @@ class Client {
 
         if ($response->getStatusCode() != 200)
             throw new \Zend\Http\Exception\RuntimeException('Query error. Reason: ' . $response->getReasonPhrase());
-
-        return new Result($response);
+        
+        return new $this->resultClass($response);
     }
 
     /**
@@ -214,6 +214,26 @@ class Client {
      */
     public function getUpdatePath() {
         return $this->updatePath;
+    }
+    
+    /**
+     * @param string $resultClass
+     * @return Client
+     */
+    public function setResultClass($resultClass) {
+        $check = new $resultClass(new \Zend\Http\Response());
+        if ( !($check instanceof ResultInterface) )
+            throw new \Exception('Result class should be instance of \SolrClient\Query\ResultInterface');
+        
+        $this->resultClass = $resultClass;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getResultClass() {
+        return $this->resultClass;
     }
 
     /**

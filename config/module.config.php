@@ -8,14 +8,15 @@ return array(
                 'port' => '8983',
                 'user' => '',
                 'password' => '',
-                'path' => '/',
+                'path' => '/solr',
                 'scheme' => 'http'
             ),
         ),
         'configuration' => array(
             'solr_default' => array(
                 'select_path' => '/select',
-                'update_path' => '/update'
+                'update_path' => '/update',
+                'resultClass' => '\SolrClient\Query\Result'
             ),
         ),
         'logger_collector' => array(

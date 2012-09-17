@@ -47,7 +47,8 @@ class ClientFactory implements FactoryInterface {
         
         $config = $options['configuration'][$this->name];
         $client->setSelectPath($config['select_path'])
-                ->setUpdatePath($config['update_path']);
+                ->setUpdatePath($config['update_path'])
+                ->setResultClass($config['resultClass']);
                
         return $client;
     }
