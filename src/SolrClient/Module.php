@@ -10,6 +10,7 @@ use Zend\ModuleManager\Feature\AutoloaderProviderInterface,
     Zend\Loader\AutoloaderFactory,
     Zend\Loader\StandardAutoloader,
     SolrClient\Service\ClientFactory,
+    Solr\Service\QueryFactory,
     SolrClient\Service\LoggerCollectorFactory;
 
 /**
@@ -62,6 +63,7 @@ class Module implements AutoloaderProviderInterface, BootstrapListenerInterface,
         return array(
             'factories' => array(
                 'solr.solr_default' => new ClientFactory('solr_default'),
+                'solr.query' => new QueryFactory(),
                 'solr.logger_collector.default' => new LoggerCollectorFactory('solr_default'),
             ),
         );
