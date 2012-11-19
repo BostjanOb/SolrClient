@@ -1,6 +1,6 @@
 <?php
 
-namespace Solr\Service;
+namespace SolrClient\Service;
 
 use Zend\ServiceManager\FactoryInterface,
     Zend\ServiceManager\ServiceLocatorInterface,

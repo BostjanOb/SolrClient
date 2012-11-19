@@ -10,7 +10,7 @@ use Zend\ModuleManager\Feature\AutoloaderProviderInterface,
     Zend\Loader\AutoloaderFactory,
     Zend\Loader\StandardAutoloader,
     SolrClient\Service\ClientFactory,
-    Solr\Service\QueryFactory,
+    SolrClient\Service\QueryFactory,
     SolrClient\Service\LoggerCollectorFactory;
 
 /**
