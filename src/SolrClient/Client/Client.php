@@ -117,6 +117,27 @@ class Client {
     }
 
     /**
+     * @param $rawQuery
+     * @param bool $fromPending
+     * @param bool $fromCommitted
+     * @param int $timeout
+     *
+     * @throws \Zend\Http\Exception\RuntimeException If an error occurs during the service call
+     */
+    public function deleteByQuery($rawQuery, $fromPending = true, $fromCommitted = true, $timeout = 3600)
+    {
+        $pendingValue = $fromPending ? 'true' : 'false';
+        $committedValue = $fromCommitted ? 'true' : 'false';
+
+        // escape special xml characters
+        $rawQuery = htmlspecialchars($rawQuery, ENT_NOQUOTES, 'UTF-8');
+
+        $rawPost = '<delete fromPending="' . $pendingValue . '" fromCommitted="' . $committedValue . '"><query>' . $rawQuery . '</query></delete>';
+
+        return $this->rawPost($rawPost);
+    }
+
+    /**
      * Commit changes
      *
      * @param bool $waitFlush Block until index changes are flushed to disk
