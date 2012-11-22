@@ -8,7 +8,7 @@ return array(
                 'port' => '8983',
                 'user' => '',
                 'password' => '',
-                'path' => '/solr/collection1',
+                'path' => '/solr',
                 'scheme' => 'http'
             ),
         ),
