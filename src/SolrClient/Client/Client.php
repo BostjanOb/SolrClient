@@ -6,7 +6,8 @@ use Zend\Uri\Http as HttpUri,
     Zend\Http,
     SolrClient\Document\Document,
     SolrClient\Query\ResultInterface,
-    SolrClient\Query\Query;
+    SolrClient\Query\Query,
+    SolrClient\Query\Result as QueryResult;
 
 /**
  * Solr Client class
