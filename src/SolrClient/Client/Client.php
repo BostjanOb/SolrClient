@@ -267,8 +267,12 @@ class Client {
         $updateUri = clone $this->uri;
         $updateUri->setPath($updateUri->getPath() . $this->updatePath);
 
+        $header = new \Zend\Http\Headers();
+        $header->addHeaderLine('Content-type', 'application/xml');
+
         $request = new Http\Request();
         $request->setUri($updateUri)
+                ->setHeaders($header)
                 ->setMethod(Http\Request::METHOD_POST)
                 ->setContent($body);
 
