@@ -441,7 +441,7 @@ class Query implements \Serializable
   /**
    * @param $qt
    */
-  public function setQt($qt)
+  public function setQueryType($qt)
   {
     $this->params['qt'] = $qt;
   }
