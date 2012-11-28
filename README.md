@@ -69,6 +69,10 @@ $solrClient->commit();
 
 // more documents at once, and commit
 $solrClient->deleteById(array(1,2,3,4), true);
+
+//or all data
+$solrClient->deleteByQuery("*:*");
+$solrClient->commit();
 ```
 
 ## Commit, optimize

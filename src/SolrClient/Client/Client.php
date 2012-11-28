@@ -6,7 +6,8 @@ use Zend\Uri\Http as HttpUri,
     Zend\Http,
     SolrClient\Document\Document,
     SolrClient\Query\ResultInterface,
-    SolrClient\Query\Query;
+    SolrClient\Query\Query,
+    SolrClient\Query\Result as QueryResult;
 
 /**
  * Solr Client class
@@ -113,6 +114,27 @@ class Client {
 
         if ($commit)
             $this->commit();
+    }
+
+    /**
+     * @param $rawQuery
+     * @param bool $fromPending
+     * @param bool $fromCommitted
+     * @param int $timeout
+     *
+     * @throws \Zend\Http\Exception\RuntimeException If an error occurs during the service call
+     */
+    public function deleteByQuery($rawQuery, $fromPending = true, $fromCommitted = true, $timeout = 3600)
+    {
+        $pendingValue = $fromPending ? 'true' : 'false';
+        $committedValue = $fromCommitted ? 'true' : 'false';
+
+        // escape special xml characters
+        $rawQuery = htmlspecialchars($rawQuery, ENT_NOQUOTES, 'UTF-8');
+
+        $rawPost = '<delete fromPending="' . $pendingValue . '" fromCommitted="' . $committedValue . '"><query>' . $rawQuery . '</query></delete>';
+
+        return $this->rawPost($rawPost);
     }
 
     /**
@@ -245,8 +267,12 @@ class Client {
         $updateUri = clone $this->uri;
         $updateUri->setPath($updateUri->getPath() . $this->updatePath);
 
+        $header = new \Zend\Http\Headers();
+        $header->addHeaderLine('Content-type', 'application/xml');
+
         $request = new Http\Request();
         $request->setUri($updateUri)
+                ->setHeaders($header)
                 ->setMethod(Http\Request::METHOD_POST)
                 ->setContent($body);
 
