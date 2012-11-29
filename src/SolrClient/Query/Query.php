@@ -23,7 +23,8 @@ class Query implements \Serializable
    *
    * @param string $query
    */
-  public function __construct($query = '*:*') {
+  public function __construct($query = '*:*')
+  {
     // set initial values
     $this->params['facet.field'] = array();
     $this->params['wt'] = 'phps';
@@ -39,7 +40,8 @@ class Query implements \Serializable
    *
    * @return array
    */
-  public function getPostQueryParams() {
+  public function getPostQueryParams()
+  {
     return $this->params;
   }
 
@@ -48,7 +50,8 @@ class Query implements \Serializable
    *
    * @return string
    */
-  public function getConstructedUrl() {
+  public function getConstructedUrl()
+  {
     $queryString = http_build_query($this->params);
     $queryString = preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '=', $queryString);
 
@@ -63,7 +66,8 @@ class Query implements \Serializable
    * @param string $tag
    * @return Query
    */
-  public function addFieldQuery($field, $value, $tag = null) {
+  public function addFieldQuery($field, $value, $tag = null)
+  {
     $tagPrefix = '';
     $fq = "{$field}:{$value}";
 
@@ -87,7 +91,8 @@ class Query implements \Serializable
    * @param string $text
    * @return Query
    */
-  public function addFieldQueryText($text) {
+  public function addFieldQueryText($text)
+  {
     $this->params['fq'][] = "{$text}";
     return $this;
   }
@@ -100,7 +105,8 @@ class Query implements \Serializable
    * @param string $to
    * @return Query
    */
-  public function addFieldRange($field, $from = '*', $to = '*') {
+  public function addFieldRange($field, $from = '*', $to = '*')
+  {
     if (empty($from))
       $from = '*';
 
@@ -117,7 +123,8 @@ class Query implements \Serializable
    * @param type $text
    * @return Query
    */
-  public function addSort($field) {
+  public function addSort($field)
+  {
     $this->params['sort'][] = $field;
     return $this;
   }
@@ -128,7 +135,8 @@ class Query implements \Serializable
    * @param bool $flag
    * @return Query
    */
-  public function setFacet($flag) {
+  public function setFacet($flag)
+  {
     $this->params['facet'] = ($flag) ? 'on' : 'offF';
     return $this;
   }
@@ -138,7 +146,8 @@ class Query implements \Serializable
    *
    * @return bool
    */
-  public function getFacet() {
+  public function getFacet()
+  {
     $v = $this->getValue('facet');
     return ( $v != null && $v == 'on' );
   }
@@ -149,7 +158,8 @@ class Query implements \Serializable
    * @param bool $flag
    * @return Query
    */
-  public function setIndent($flag) {
+  public function setIndent($flag)
+  {
     $this->params['indent'] = ($flag) ? 'on' : 'off';
     return $this;
   }
@@ -159,7 +169,8 @@ class Query implements \Serializable
    *
    * @return bool
    */
-  public function getIndent() {
+  public function getIndent()
+  {
     $v = $this->getValue('indent');
     return ( $v != null && $v == 'on' );
   }
@@ -170,7 +181,8 @@ class Query implements \Serializable
    * @param string $fieldName
    * @return Query
    */
-  public function addFacetField($fieldName) {
+  public function addFacetField($fieldName)
+  {
     $this->params['facet.field'][] = $fieldName;
     return $this;
   }
@@ -181,7 +193,8 @@ class Query implements \Serializable
    * @param string $query
    * @return Query
    */
-  public function addFacetQuery($query) {
+  public function addFacetQuery($query)
+  {
     $this->params['facet.query'][] = $query;
     return $this;
   }
@@ -191,7 +204,8 @@ class Query implements \Serializable
    *
    * @return Query
    */
-  public function removeAllFacetFields() {
+  public function removeAllFacetFields()
+  {
     $this->params['facet.field'] = array();
     return $this;
   }
@@ -201,7 +215,8 @@ class Query implements \Serializable
    *
    * @return array
    */
-  public function getFacetFields() {
+  public function getFacetFields()
+  {
     return $this->getValue('facet.field');
   }
 
@@ -211,7 +226,8 @@ class Query implements \Serializable
    * @param string $fieldName
    * @return Query
    */
-  public function removeFacetField($fieldName) {
+  public function removeFacetField($fieldName)
+  {
     if (false !== ($key = array_search($fieldName, $this->params['facet.field']) ))
       unset($this->params['facet.field'][$key]);
 
@@ -224,7 +240,8 @@ class Query implements \Serializable
    * @param string $fieldName
    * @return bool
    */
-  public function isFieldFacet($fieldName) {
+  public function isFieldFacet($fieldName)
+  {
     return \in_array($fieldName, $this->params['facet.field']);
   }
 
@@ -234,7 +251,8 @@ class Query implements \Serializable
    * @param int $limit
    * @return Query
    */
-  public function setFacetLimit($limit, $fieldName = null) {
+  public function setFacetLimit($limit, $fieldName = null)
+  {
     $this->setFacetFieldParamValue($fieldName, 'limit', $limit);
     return $this;
   }
@@ -244,7 +262,8 @@ class Query implements \Serializable
    *
    * @return int
    */
-  public function getFacetLimit($fieldName = null) {
+  public function getFacetLimit($fieldName = null)
+  {
     return $this->getFacetValue($fieldName, 'limit');
   }
 
@@ -254,7 +273,8 @@ class Query implements \Serializable
    * @param int $count
    * @return Query
    */
-  public function setFacetMinCount($count, $fieldName = null) {
+  public function setFacetMinCount($count, $fieldName = null)
+  {
     $this->setFacetFieldParamValue($fieldName, 'mincount', $count);
     return $this;
   }
@@ -265,7 +285,8 @@ class Query implements \Serializable
    * @param int $count
    * @return Query
    */
-  public function setFacetPrefix($prefix, $fieldName = null) {
+  public function setFacetPrefix($prefix, $fieldName = null)
+  {
     $this->setFacetFieldParamValue($fieldName, 'prefix', $prefix);
     return $this;
   }
@@ -275,7 +296,8 @@ class Query implements \Serializable
    *
    * @return int
    */
-  public function getFacetMinCount($fieldName = null) {
+  public function getFacetMinCount($fieldName = null)
+  {
     return $this->getFacetValue($fieldName, 'mincount');
   }
 
@@ -285,7 +307,8 @@ class Query implements \Serializable
    * @param int $rows
    * @return Query
    */
-  public function setRows($rows) {
+  public function setRows($rows)
+  {
     $this->params['rows'] = $rows;
     return $this;
   }
@@ -295,7 +318,8 @@ class Query implements \Serializable
    *
    * @return int
    */
-  public function getRows() {
+  public function getRows()
+  {
     return $this->getValue('rows');
   }
 
@@ -305,7 +329,8 @@ class Query implements \Serializable
    * @param int $start
    * @return Query
    */
-  public function setStart($start) {
+  public function setStart($start)
+  {
     $this->params['start'] = $start;
     return $this;
   }
@@ -315,7 +340,8 @@ class Query implements \Serializable
    *
    * @return int
    */
-  public function getStart() {
+  public function getStart()
+  {
     return $this->params['start'];
   }
 
@@ -325,7 +351,8 @@ class Query implements \Serializable
    * @param string $q
    * @return Query
    */
-  public function setQuery($q) {
+  public function setQuery($q)
+  {
     $this->params['q'] = $q;
     return $this;
   }
@@ -335,7 +362,8 @@ class Query implements \Serializable
    *
    * @return string
    */
-  public function getQuery() {
+  public function getQuery()
+  {
     return $this->getValue('q');
   }
 
@@ -345,7 +373,8 @@ class Query implements \Serializable
    * @param bool $val
    * @return Query
    */
-  public function enableSpellcheck($val = true) {
+  public function enableSpellcheck($val = true)
+  {
     $this->params['spellcheck'] = ($val) ? 'on' : 'off';
     $this->params['spellcheck.collate'] = ($val) ? 'on' : 'off';
     return $this;
@@ -357,7 +386,8 @@ class Query implements \Serializable
    * @param string $field
    * @return string|null
    */
-  private function getFacetValue($field, $param) {
+  private function getFacetValue($field, $param)
+  {
     $f = 'facet.' . $param;
 
     if (null != $field)
@@ -373,7 +403,8 @@ class Query implements \Serializable
    * @param string $param
    * @param string $value
    */
-  private function setFacetFieldParamValue($field, $param, $value) {
+  private function setFacetFieldParamValue($field, $param, $value)
+  {
     $f = 'facet.' . $param;
 
     if (null != $field)
@@ -382,7 +413,8 @@ class Query implements \Serializable
     $this->params[$f] = $value;
   }
 
-  private function getValue($name) {
+  private function getValue($name)
+  {
     return ( isset($this->params[$name]) ) ? $this->params[$name] : null;
   }
 
@@ -391,7 +423,8 @@ class Query implements \Serializable
    *
    * @return string
    */
-  public function serialize() {
+  public function serialize()
+  {
     return serialize($this->params);
   }
 
@@ -400,8 +433,17 @@ class Query implements \Serializable
    *
    * @param string $data
    */
-  public function unserialize($data) {
+  public function unserialize($data)
+  {
     $this->params = unserialize($data);
+  }
+
+  /**
+   * @param $qt
+   */
+  public function setQueryType($qt)
+  {
+    $this->params['qt'] = $qt;
   }
 
 }
