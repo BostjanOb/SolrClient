@@ -381,6 +381,17 @@ class Query implements \Serializable
   }
 
   /**
+   * Build spellcheck
+   *
+   * @return Query
+   */
+  public function buildSpellcheck()
+  {
+      $this->params['spellcheck.build'] = 'true';
+      return $this;
+  }
+
+  /**
    * Gets main facet option
    *
    * @param string $field
