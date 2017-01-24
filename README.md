@@ -1,3 +1,8 @@
+# THIS PROJECT IS DEPRECATED. Take a look at [solarium project] (http://www.solarium-project.org)
+
+
+
+
 # Apache Solr Client for Zend Framework 2
 
 Features :
